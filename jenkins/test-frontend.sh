@@ -7,7 +7,7 @@ echo Testing Frontend...
 # simluate frontend tests running and producing a result
 sleep 5
 
-mkdir -p ./target/surefire-reports
+mkdir -p ./target/test-results
 cp ./jenkins/data/TEST* ./target/test-results/
 echo Frontend Testing completed. 
 exit 0
