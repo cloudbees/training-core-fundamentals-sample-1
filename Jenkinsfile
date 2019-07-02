@@ -134,6 +134,11 @@ pipeline {
         }
       }
     }
+    stage('Confirm Deploy') {
+      steps {
+        input(message: 'Okay to Deploy to Staging?', ok: 'Let\'s Do it!')
+      }
+    }
     stage('Fluffy Deploy') {
       agent {
         node {
