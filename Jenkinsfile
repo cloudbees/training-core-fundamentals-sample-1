@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'jdk11'
+    }
+
+  }
   stages {
     stage('Fluffy Build') {
       steps {
