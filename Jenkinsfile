@@ -8,19 +8,17 @@ pipeline {
   stages {
     stage('Fluffy Build') {
       steps {
-        echo 'Fluffy build message'
-        sh 'echo Edited placeholder in Fluffy Build stage'
+        sh 'jenkins/build.sh'
       }
     }
     stage('Fluffy Test') {
       steps {
-        sh 'sleep 5'
-        sh 'echo Success!'
+        sh 'jenkins/test-all.sh'
       }
     }
     stage('Fluffy Deploy') {
       steps {
-        echo 'Fluffy Deploy Message'
+        sh 'jenkins/deploy.sh staging'
       }
     }
   }
