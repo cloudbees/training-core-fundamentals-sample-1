@@ -9,7 +9,7 @@ pipeline {
     stage('Fluffy Build') {
       steps {
         echo 'Fluffy build message'
-        sh 'echo Another Placeholder in Fluffy Build stage'
+        sh 'echo Edited placeholder in Fluffy Build stage'
       }
     }
     stage('Fluffy Test') {
