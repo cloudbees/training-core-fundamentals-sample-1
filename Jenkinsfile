@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'jdk8'
-    }
-
-  }
+  agent any
   stages {
     stage('Fluffy Build') {
       steps {
@@ -14,11 +9,6 @@ pipeline {
     }
     stage('Fluffy Test') {
       parallel {
-        stage('Performance') {
-          steps {
-            sh 'jenkins/test-performance.sh'
-          }
-        }
         stage('Backend') {
           steps {
             sh 'jenkins/test-backend.sh'
@@ -29,6 +19,11 @@ pipeline {
           steps {
             sh 'jenkins/test-frontend.sh'
             junit 'target/test-results/**/TEST*.xml'
+          }
+        }
+        stage('Performance') {
+          steps {
+            sh 'jenkins/test-performance.sh'
           }
         }
         stage('Static') {
