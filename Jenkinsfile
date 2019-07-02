@@ -1,15 +1,13 @@
 pipeline {
-  agent {
-    node {
-      label 'jdk11'
-    }
-
-  }
+  agent none
   stages {
     stage('Fluffy Build') {
       steps {
-        sh 'jenkins/build.sh'
-        archiveArtifacts 'target/*.jar'
+        node(label: 'java8') {
+          sh 'jenkins/build.sh'
+          archiveArtifacts 'target/*.jar'
+        }
+
       }
     }
     stage('Fluffy Test') {
