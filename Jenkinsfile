@@ -82,18 +82,6 @@ pipeline {
             sh './jenkins/test-frontend.sh'
           }
         }
-        stage('Performance Java 8') {
-          agent {
-            node {
-              label 'java8'
-            }
-
-          }
-          steps {
-            unstash 'Java 8'
-            sh './jenkins/test-performance.sh'
-          }
-        }
         stage('Static Java 8') {
           agent {
             node {
@@ -144,18 +132,6 @@ pipeline {
             sh './jenkins/test-frontend.sh'
           }
         }
-        stage('Performance Java 11') {
-          agent {
-            node {
-              label 'java11'
-            }
-
-          }
-          steps {
-            unstash 'Java 11'
-            sh './jenkins/test-performance.sh'
-          }
-        }
         stage('Static Java 11') {
           agent {
             node {
@@ -166,6 +142,34 @@ pipeline {
           steps {
             unstash 'Java 11'
             sh './jenkins/test-static.sh'
+          }
+        }
+      }
+    }
+    stage('Fluffy Performance') {
+      parallel {
+        stage('Performance Java 8') {
+          agent {
+            node {
+              label 'java8'
+            }
+
+          }
+          steps {
+            unstash 'Java 8'
+            sh './jenkins/test-performance.sh'
+          }
+        }
+        stage('Performance Java 11') {
+          agent {
+            node {
+              label 'java11'
+            }
+
+          }
+          steps {
+            unstash 'Java 11'
+            sh './jenkins/test-performance.sh'
           }
         }
       }
