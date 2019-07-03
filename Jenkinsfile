@@ -146,7 +146,6 @@ pipeline {
         }
       }
     }
-    checkpoint 'Finished base tests'
     stage('Fluffy Performance') {
       parallel {
         stage('Performance Java 8') {
@@ -175,7 +174,14 @@ pipeline {
         }
       }
     }
-    checkpoint 'Finished performance tests'
+    stage('Tests Complete Checkpoint') {
+      when {
+        branch 'master'
+      }
+      steps {
+        checkpoint 'Finished tests'
+      }
+    }
     stage('Confirm Deploy') {
       when {
         branch 'master'
@@ -184,7 +190,6 @@ pipeline {
         input(message: 'Okay to Deploy to Staging?', ok: 'Let\'s Do it!')
       }
     }
-    checkpoint 'Deployment confirmed'
     stage('Fluffy Deploy') {
       agent {
         node {
