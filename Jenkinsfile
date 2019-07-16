@@ -108,6 +108,20 @@ pipeline {
         }
       }
     }
+    stage('Fluffy Integration Test') {
+      parallel {
+        stage('Frontend Integration Test') {
+          steps {
+            sh 'jenkins/test-frontend.sh'
+          }
+        }
+        stage('Frontend Integration Java 11') {
+          steps {
+            sh 'jenkins/test-frontend.sh'
+          }
+        }
+      }
+    }
     stage('Fluffy Performance') {
       parallel {
         stage('Performance Java 8') {
@@ -157,20 +171,6 @@ pipeline {
       steps {
         unstash 'Java 11'
         sh "./jenkins/deploy.sh ${params.DEPLOY_TO}"
-      }
-    }
-    stage('Fluffy Integration Test') {
-      parallel {
-        stage('Frontend Integration Test') {
-          steps {
-            sh 'jenkins/test-frontend.sh'
-          }
-        }
-        stage('Frontend Integration Java 11') {
-          steps {
-            sh 'jenkins/test-frontend.sh'
-          }
-        }
       }
     }
   }
