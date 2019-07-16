@@ -179,7 +179,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        checkpoint 'Finished tests'
+        echo "checkpoint 'Finished tests'"
       }
     }
     stage('Confirm Deploy') {
