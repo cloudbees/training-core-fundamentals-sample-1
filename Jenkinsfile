@@ -197,6 +197,11 @@ pipeline {
         sh "./jenkins/deploy.sh ${params.DEPLOY_TO}"
       }
     }
+    stage('Frontend Integration Test') {
+      steps {
+        sh 'jenkins/test-frontend.sh'
+      }
+    }
   }
   parameters {
     string(name: 'DEPLOY_TO', defaultValue: 'dev', description: '')
