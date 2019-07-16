@@ -124,7 +124,7 @@ pipeline {
         stage('Frontend Integration Java 11') {
           agent {
             node {
-              label 'java11
+              label 'java11'
             }
 
           }
