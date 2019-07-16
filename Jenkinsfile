@@ -111,11 +111,23 @@ pipeline {
     stage('Fluffy Integration Test') {
       parallel {
         stage('Frontend Integration Test') {
+          agent {
+            node {
+              label 'java8'
+            }
+
+          }
           steps {
             sh 'jenkins/test-frontend.sh'
           }
         }
         stage('Frontend Integration Java 11') {
+          agent {
+            node {
+              label 'java11
+            }
+
+          }
           steps {
             sh 'jenkins/test-frontend.sh'
           }
