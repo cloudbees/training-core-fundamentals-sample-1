@@ -42,7 +42,7 @@ pipeline {
         }
       }
     }
-    stage('Fluffy Test') {
+    stage('Fluffy Unit Test') {
       parallel {
         stage('Backend Java 8') {
           agent {
@@ -61,25 +61,6 @@ pipeline {
           steps {
             unstash 'Java 8'
             sh './jenkins/test-backend.sh'
-          }
-        }
-        stage('Frontend') {
-          agent {
-            node {
-              label 'java8'
-            }
-
-          }
-          post {
-            always {
-              junit 'target/test-results/**/TEST*.xml'
-
-            }
-
-          }
-          steps {
-            unstash 'Java 8'
-            sh './jenkins/test-frontend.sh'
           }
         }
         stage('Static Java 8') {
@@ -111,25 +92,6 @@ pipeline {
           steps {
             unstash 'Java 11'
             sh './jenkins/test-backend.sh'
-          }
-        }
-        stage('Frontend Java 11') {
-          agent {
-            node {
-              label 'java11'
-            }
-
-          }
-          post {
-            always {
-              junit 'target/test-results/**/TEST*.xml'
-
-            }
-
-          }
-          steps {
-            unstash 'Java 11'
-            sh './jenkins/test-frontend.sh'
           }
         }
         stage('Static Java 11') {
@@ -197,9 +159,18 @@ pipeline {
         sh "./jenkins/deploy.sh ${params.DEPLOY_TO}"
       }
     }
-    stage('Frontend Integration Test') {
-      steps {
-        sh 'jenkins/test-frontend.sh'
+    stage('Fluffy Integration Test') {
+      parallel {
+        stage('Frontend Integration Test') {
+          steps {
+            sh 'jenkins/test-frontend.sh'
+          }
+        }
+        stage('Frontend Integration Java 11') {
+          steps {
+            sh 'jenkins/test-frontend.sh'
+          }
+        }
       }
     }
   }
