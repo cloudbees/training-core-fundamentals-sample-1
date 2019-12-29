@@ -6,7 +6,7 @@ pipeline {
         stage('Build Java 8') {
           agent {
             node {
-              label 'java8'
+              label 'java8 && !windows'
             }
 
           }
@@ -18,7 +18,7 @@ pipeline {
         stage('Build Java 11') {
           agent {
             node {
-              label 'java11'
+              label 'java11 && !windows'
             }
 
           }
@@ -35,7 +35,7 @@ pipeline {
         stage('Backend Java 8') {
           agent {
             node {
-              label 'java8'
+              label 'java8 && !windows'
             }
 
           }
@@ -48,7 +48,7 @@ pipeline {
         stage('Frontend') {
           agent {
             node {
-              label 'java8'
+              label 'java8 && !windows'
             }
 
           }
@@ -61,7 +61,7 @@ pipeline {
         stage('Performance Java 8') {
           agent {
             node {
-              label 'java8'
+              label 'java8 && !windows'
             }
 
           }
@@ -73,7 +73,7 @@ pipeline {
         stage('Static Java 8') {
           agent {
             node {
-              label 'java8'
+              label 'java8 && !windows'
             }
 
           }
@@ -85,7 +85,7 @@ pipeline {
         stage('Backend Java 11') {
           agent {
             node {
-              label 'java11'
+              label 'java11 && !windows'
             }
 
           }
@@ -98,7 +98,7 @@ pipeline {
         stage('Frontend Java 11') {
           agent {
             node {
-              label 'java11'
+              label 'java11 && !windows'
             }
 
           }
@@ -111,7 +111,7 @@ pipeline {
         stage('Performance Java 11') {
           agent {
             node {
-              label 'java11'
+              label 'java11 && !windows'
             }
 
           }
@@ -123,7 +123,7 @@ pipeline {
         stage('Static Java 11') {
           agent {
             node {
-              label 'java11'
+              label 'java11 && !windows'
             }
 
           }
@@ -142,7 +142,7 @@ pipeline {
     stage('Fluffy Deploy') {
       agent {
         node {
-          label 'java11'
+          label 'java11 && !windows'
         }
 
       }
